@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-amber-50 via-orange-50 to-pink-50 font-sans;
+  color: #1a1a1a;
+}
+
+@layer utilities {
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
+  }
+  
+  .gradient-sunset {
+    @apply bg-gradient-to-r from-orange-400 via-rose-400 to-pink-400 bg-clip-text text-transparent;
+  }
+}
