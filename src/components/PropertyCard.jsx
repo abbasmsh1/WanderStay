@@ -8,7 +8,6 @@ export default function PropertyCard({ property }) {
   return (
     <motion.div
       className="group cursor-pointer"
-      whileHover={{ y: -8 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -16,25 +15,22 @@ export default function PropertyCard({ property }) {
     >
       <div className="card-glass rounded-2xl overflow-hidden">
         <div className="relative h-64 overflow-hidden">
-          <motion.div 
-            className="absolute inset-0"
+          <div
+            className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
             style={{ background: property.image }}
-            animate={{ scale: 1.1 }}
-            whileHover={{ scale: 1.15 }}
-            transition={{ duration: 0.6 }}
           />
           
-          <motion.button
+          <button
             onClick={() => setIsLiked(!isLiked)}
-            className="absolute top-4 right-4 bg-white/90 p-2 rounded-full backdrop-blur-sm hover:bg-white transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            aria-pressed={isLiked}
+            aria-label="Save to wishlist"
+            className="absolute top-4 right-4 bg-white/95 p-2 rounded-full hover:bg-white transition-colors active:scale-95"
           >
             <Heart 
               size={20} 
-              className={isLiked ? 'fill-red-500 text-red-500' : 'text-gray-400'}
+              className={isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-500'}
             />
-          </motion.button>
+          </button>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
@@ -53,13 +49,12 @@ export default function PropertyCard({ property }) {
 
           <div className="flex flex-wrap gap-2 mb-4">
             {property.amenities.slice(0, 3).map((amenity, i) => (
-              <motion.span 
+              <span
                 key={i}
-                className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium"
-                whileHover={{ scale: 1.05 }}
+                className="text-xs bg-orange-100 text-orange-800 px-2.5 py-1 rounded-full font-medium"
               >
                 {amenity}
-              </motion.span>
+              </span>
             ))}
             {property.amenities.length > 3 && (
               <span className="text-xs text-gray-600 px-2 py-1">
@@ -71,15 +66,11 @@ export default function PropertyCard({ property }) {
           <div className="flex items-center justify-between pt-4 border-t border-gray-200">
             <div>
               <p className="text-sm text-gray-600">Per night</p>
-              <p className="text-2xl font-bold gradient-sunset">${property.price}</p>
+              <p className="text-2xl font-bold text-gray-900 tabular-nums">${property.price}</p>
             </div>
-            <motion.button 
-              className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-lg font-semibold"
-              whileHover={{ scale: 1.05, boxShadow: '0 8px 20px rgba(255, 107, 107, 0.3)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Book Now
-            </motion.button>
+            <button className="bg-orange-600 group-hover:bg-orange-700 text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors">
+              Book now
+            </button>
           </div>
         </div>
       </div>

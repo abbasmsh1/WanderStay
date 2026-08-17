@@ -16,7 +16,7 @@ export default function Filters({ properties, setFiltered }) {
 
   return (
     <motion.section 
-      className="bg-white/60 backdrop-blur-sm border-b border-gray-200 py-6"
+      className="bg-white border-b border-orange-100 py-6"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
     >
@@ -32,7 +32,7 @@ export default function Filters({ properties, setFiltered }) {
               max="700"
               value={priceRange[1]}
               onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-              className="w-full cursor-pointer"
+              className="w-full cursor-pointer accent-orange-600"
               onChangeCapture={handleFilter}
             />
           </div>
@@ -43,34 +43,31 @@ export default function Filters({ properties, setFiltered }) {
             </label>
             <div className="flex gap-2">
               {[0, 4.5, 4.7, 4.8, 4.9].map((r) => (
-                <motion.button
+                <button
                   key={r}
                   onClick={() => {
                     setRating(r)
                     handleFilter()
                   }}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    rating === r 
-                      ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  aria-pressed={rating === r}
+                  className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    rating === r
+                      ? 'bg-orange-600 text-white'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:border-orange-600 hover:text-orange-700'
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  {r === 0 ? 'All' : `${r}★`}
-                </motion.button>
+                  {r === 0 ? 'All' : `${r}+`}
+                </button>
               ))}
             </div>
           </div>
 
-          <motion.button 
+          <button
             onClick={handleFilter}
-            className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-8 py-2 rounded-lg font-semibold"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2.5 rounded-lg font-semibold transition-colors w-full md:w-auto md:justify-self-end"
           >
-            Apply Filters
-          </motion.button>
+            Apply filters
+          </button>
         </div>
       </div>
     </motion.section>
